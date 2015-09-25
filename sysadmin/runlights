@@ -1,12 +1,12 @@
-#! /bin/sh
+#!/bin/sh
 
 ### BEGIN INIT INFO
 # Provides:		runlights
 # Required-Start:	
 # Required-Stop:	
 # Default-Start:	2 3 4 5
-# Default-Stop:		
-# Short-Description:	Runs a string of lights
+# Default-Stop:		0 1 6
+# Short-Description:	Runs a string of lights over SPI
 ### END INIT INFO
 
 set -e
