@@ -1,0 +1,30 @@
+#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:		runlights
+# Required-Start:	
+# Required-Stop:	
+# Default-Start:	2 3 4 5
+# Default-Stop:		
+# Short-Description:	Runs a string of lights
+### END INIT INFO
+
+set -e
+
+# /etc/init.d/ssh: start and stop the OpenBSD "secure shell(tm)" daemon
+
+test -x /home/pi/APA102_Pi/customchase.py || exit 0
+
+umask 022
+
+case "$1" in
+  start)
+	start-stop-daemon --start --background --make-pidfile --pidfile /var/run/lights.pid --startas /home/pi/APA102_Pi/customchase.py 0.1
+	;;
+  stop)
+	start-stop-daemon --stop --pidfile /var/run/lights.pid --retry 10
+	;;
+
+esac
+
+exit 0
