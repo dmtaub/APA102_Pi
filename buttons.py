@@ -24,9 +24,9 @@ def Butt(channel):
       return # was already stop, so something is fucked up
     else: 
       if (clock() - lastClock) > thresh:
-				Reboot(channel)
-			else:
-				Shutdown(channel)
+        Reboot(channel)
+      else:
+        Shutdown(channel)
 
     mutt = 2 #rising (stop)
   else:
