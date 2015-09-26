@@ -50,8 +50,8 @@ try:
         strip.show()    
         sleep(pause)
 except KeyboardInterrupt:  # Abbruch...
-print('Interrupted...')
-strip.clearStrip()
-print('Strip cleared')
-strip.cleanup()
-print('SPI closed')
+  print('Interrupted...')
+  strip.clearStrip()
+  print('Strip cleared')
+  strip.cleanup()
+  print('SPI closed')
