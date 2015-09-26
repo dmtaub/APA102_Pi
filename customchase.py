@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import apa102
+import buttons
+
 from sys import argv
 from time import sleep
 
