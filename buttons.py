@@ -15,7 +15,11 @@ ShortShutdown = None
 mutt = 0
 lastClock = 0
 def Butt(channel):
+  #TODO: delay on start
   global mutt, lastClock, thresh
+  if lastClock == 0:
+    lastClock = clock()
+    return
   if gpio.input(REBOOT_PIN):
     if mutt == 2:
       print "ignore doubled stop"

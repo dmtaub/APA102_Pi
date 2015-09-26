@@ -33,12 +33,12 @@ class Exit:
     self.strip = strip
     self.enabled = True
   def longShut(self, c):
-    self.strip.setStrip(0,255,0)
+    self.strip.setStrip(255,0,0)
     strip.cleanup()
     self.enabled=False
     self.shut()
   def shortShut(self, c):
-    self.strip.setStrip(255,0,0)
+    self.strip.setStrip(0,0,0)
     strip.cleanup()
     self.enabled=False
     self.shut()
