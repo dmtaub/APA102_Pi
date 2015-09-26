@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import apa102
 import buttons
-
+from config import numPixels
 from sys import argv
 from time import sleep
 
@@ -30,9 +30,13 @@ if brite > 31:
 """
 Chase a segment of LEDs round the strip
 """
+def shutdown():
+  print 22
 try:
-  numPixels = 432-73 # 1/2 Strip plus one LED is broken
   strip = apa102.APA102(numPixels, brite) # Low brightness (2 out of max. 31)
+
+  buttons.init(shutdown)
+
   while True:  # Loop forever
     for j in range(256): # Change the color through the color wheel
       for q in range(7):
