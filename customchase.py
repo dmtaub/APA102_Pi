@@ -4,6 +4,7 @@ import buttons
 from config import numPixels
 from sys import argv
 from time import sleep
+import os
 
 if len(argv)>1:
   pause = float(argv[1])
@@ -33,10 +34,16 @@ class Exit:
     self.enabled = True
   def longShut(self, c):
     self.strip.setStrip(0,255,0)
+    strip.cleanup()
     self.enabled=False
+    self.shut()
   def shortShut(self, c):
     self.strip.setStrip(255,0,0)
+    strip.cleanup()
     self.enabled=False
+    self.shut()
+  def shut(self):
+    os.system("sudo shutdown -h now")
 
 """
 Chase a segment of LEDs round the strip
