@@ -27,21 +27,32 @@ if brite < 2:
 if brite > 31:
   brite = 31
 
+class Exit:
+  def __init__ (self, strip):
+    self.strip = strip
+    self.enabled = True
+  def longShut(self, c):
+    self.strip.setStrip(0,255,0)
+    self.enabled=False
+  def shortShut(self, c):
+    self.strip.setStrip(255,0,0)
+    self.enabled=False
+
 """
 Chase a segment of LEDs round the strip
 """
-def shutdown():
-  print 22
 try:
   strip = apa102.APA102(numPixels, brite) # Low brightness (2 out of max. 31)
+  e = Exit(strip) 
+  buttons.init(e.longShut,e.shortShut)
 
-  buttons.init(shutdown)
-
-  while True:  # Loop forever
+  while e.enabled:  # Loop forever
     for j in range(256): # Change the color through the color wheel
       for q in range(7):
         # For smooth entry and exit, the loop must start and end with hidden pixels
         # This way, the pixels "roll in" and "slide out" of the strip
+        if not e.enabled:
+          break
         for i in range(-5, numPixels, 7): # Each segment is 7 LEDs long
           index = strip.wheel( (i + j) % 255)
           strip.setPixelRGB(i+q, 0);

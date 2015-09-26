@@ -88,6 +88,12 @@ class APA102:
     def clearStrip(self):
         self.spi.xfer2([self.ledstart, 0x00, 0x00, 0x00] * self.numLEDs)
         self.clockEndFrame() # ... and clock the end frame so that also the last LED(s) shut down.
+    """
+    Sets the color for the entire strip , and immediately shows the result.
+    """
+    def setStrip(self,r,g,b):
+        self.spi.xfer2([self.ledstart, b, g, r] * self.numLEDs)
+        self.clockEndFrame() # ... and clock the end frame so that also the last LED(s) shut down.
 
     """
     Sets the color of one pixel in the LED stripe. The changed pixel is not shown yet on the Stripe, it is only

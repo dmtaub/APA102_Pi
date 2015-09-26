@@ -1,16 +1,16 @@
 import RPi.GPIO as gpio
 import os
 from time import clock
-import apa102
-from config import numPixels
 
-REBOOT_PIN = 5
+REBOOT_PIN = 3
 thresh = 0.3
 
 gpio.setmode(gpio.BCM)
-gpio.setup(REBOOT_PIN, gpio.IN, pull_up_down = gpio.PUD_UP)
+#gpio.setup(REBOOT_PIN, gpio.IN, pull_up_down = gpio.PUD_UP)
+gpio.setup(REBOOT_PIN, gpio.IN)
 
-Shutdown = None
+LongShutdown = None
+ShortShutdown = None
 
 mutt = 0
 lastClock = 0
@@ -22,10 +22,9 @@ def Butt(channel):
       return # was already stop, so something is fucked up
     else: 
       if (clock() - lastClock) > thresh:
-        strip.clearStrip()
-        Shutdown(channel)
+        LongShutdown(channel)
       else:
-        Shutdown(channel)
+        ShortShutdown(channel)
 
     mutt = 2 #rising (stop)
   else:
@@ -33,8 +32,8 @@ def Butt(channel):
     mutt = 1 #falling (start)
     lastClock = clock()
 
-def init(shutdown_func):
-  print shutdown_func
-  global Shutdown
-  Shutdown = shutdown_func
+def init(sd1,sd2):
+  global LongShutdown, ShortShutdown
+  LongShutdown = sd1
+  ShortShutdown = sd2
   gpio.add_event_detect(REBOOT_PIN, gpio.BOTH, callback = Butt)
