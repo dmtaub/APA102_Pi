@@ -1,0 +1,9 @@
+Package: pifun
+Priority: optional
+Section: devel
+Installed-Size: 22
+Maintainer: Dan Taub <dmtaub@gmail.com>
+Architecture: i368
+Version: 0.1-0
+Depends: imagemagick feh
+Description: Testing pkg management way of installing deps
