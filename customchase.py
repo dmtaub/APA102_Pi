@@ -33,13 +33,17 @@ class Exit:
     self.strip = strip
     self.enabled = True
   def longShut(self, c):
+    print "long"
     self.strip.setStrip(255,0,0)
-    strip.cleanup()
+    self.strip.setStrip(0,0,0)
+    self.strip.setStrip(255,0,0)
     self.enabled=False
     self.shut()
   def shortShut(self, c):
+    print "short"
     self.strip.setStrip(0,0,0)
-    strip.cleanup()
+    self.strip.setStrip(255,0,0)
+    self.strip.setStrip(0,0,0)
     self.enabled=False
     self.shut()
   def shut(self):
@@ -71,6 +75,7 @@ try:
           strip.setPixelRGB(i+q+6, index); # Wrap, if we are at the end of the strip
         strip.show()    
         sleep(pause)
+  strip.cleanup()
 except KeyboardInterrupt:  # Abbruch...
   print('Interrupted...')
   strip.clearStrip()
